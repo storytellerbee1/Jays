@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jay's Beauty Experience</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fffaf5;
+      color: #333;
+    }
+    header {
+      background: black;
+      color: gold;
+      padding: 20px;
+      text-align: center;
+    }
+    header img {
+      max-width: 150px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: 2em;
+    }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    label, select, input[type="date"], input[type="time"] {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    input[type="checkbox"] {
+      width: auto;
+      margin-right: 10px;
+    }
+    .add-ons label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    button {
+      background: gold;
+      border: none;
+      padding: 15px 25px;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .policy {
+      background: #fff5d9;
+      padding: 20px;
+      border-left: 5px solid gold;
+      border-radius: 8px;
+      line-height: 1.6em;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      background: white;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    .popup button {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Hair_Braids_Icon.png/240px-Hair_Braids_Icon.png" alt="Jay's Beauty Logo"/>
+    <h1>Jay's Beauty Experience</h1>
+    <p>Book your flawless style today!</p>
+  </header>
+  <div class="container">
+    <div class="section policy">
+      <h2>Policy</h2>
+      <p>• Hair must be washed and blow-dried with no product (unless you book the "Wash & Blow Dry" add-on.)</p>
+      <p>• All hair is included (if color other than 1, 1B, and 2 is needed, please message me right after booking.)</p>
+      <p>• A $25 deposit via CashApp must be sent within 1 hour of booking your appointment. You will receive confirmation of your deposit within 2 hours (via CashApp reply).</p>
+      <p>• Address will be sent 48 hours before your appointment.</p>
+      <p>• Squeeze-in appointments are within 48 hours of booking.</p>
+      <p>• Photos are optional, please let me know if you wish to be photo free!</p>
+      <p>• A late fee of $20 will be added once you are 10+ minutes late to your appointment. After 20 minutes, your appointment will be canceled.</p>
+    </div>
+
+    <div class="section">
+      <h2>Choose Your Style</h2>
+      <select id="style">
+        <option>Small Knotless Braids - $175</option>
+        <option>Medium Knotless Braids - $145</option>
+        <option>Large Knotless Braids - $120</option>
+        <option>Stitch Feed-In Braids - $15 per braid</option>
+        <option>Faux Locs - $155</option>
+        <option>Island Twists - $155</option>
+      </select>
+    </div>
+
+    <div class="section add-ons">
+      <h2>Add-ons</h2>
+      <label><input type="checkbox" value="Waist Length ($20)"> Waist Length ($20)</label>
+      <label><input type="checkbox" value="Butt Length ($30)"> Butt Length ($30)</label>
+      <label><input type="checkbox" value="Thigh Length ($50)"> Thigh Length ($50)</label>
+      <label><input type="checkbox" value="Wash and Blow Dry ($20)"> Wash and Blow Dry ($20)</label>
+      <label><input type="checkbox" value="Boho Curls ($20)"> Boho Curls ($20)</label>
+      <label><input type="checkbox" value="Lunch (Free)"> Lunch (Small Knotless Only - Free)</label>
+      <label><input type="checkbox" value="Color Custom ($5)"> Hair Color outside 1/1B/2 ($5)</label>
+      <input type="text" placeholder="Enter your custom hair color here" />
+      <label><input type="checkbox" value="Squeeze-In < 24 hrs ($100)"> Squeeze-In (within 24 hrs - $100)</label>
+      <label><input type="checkbox" value="Squeeze-In < 48 hrs ($60)"> Squeeze-In (within 48 hrs - $60)</label>
+    </div>
+
+    <div class="section">
+      <h2>Select Date and Time</h2>
+      <input type="date" id="date" />
+      <select id="time">
+        <option>8:00 AM</option>
+        <option>9:00 AM</option>
+        <option>10:00 AM</option>
+        <option>11:00 AM</option>
+        <option>12:00 PM</option>
+        <option>1:00 PM</option>
+        <option>2:00 PM</option>
+        <option>3:00 PM</option>
+        <option>4:00 PM</option>
+      </select>
+    </div>
+
+    <div class="section">
+      <button onclick="confirmBooking()">Book My Appointment</button>
+    </div>
+  </div>
+
+  <div id="confirmationPopup" class="popup">
+    <h2>Thanks so much for booking!</h2>
+    <p id="confirmText"></p>
+    <button onclick="window.location.href='https://cash.app/$Jaysbeautyexperince'">Send $25 Deposit</button>
+  </div>
+
+  <script>
+    function confirmBooking() {
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const confirmText = document.getElementById('confirmText');
+      confirmText.innerHTML = `Your appointment is confirmed for <strong>${date}</strong> at <strong>${time}</strong>.`;
+      document.getElementById('confirmationPopup').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
